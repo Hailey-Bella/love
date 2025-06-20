@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bella & Hailey 的爱情故事</title>
+    <style>
+        :root {
+            --primary-color: #ff6b8b;
+            --secondary-color: #6b8bff;
+            --bg-color: #fff5f7;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            margin-top: 0.5rem;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .timer {
+            font-size: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .days-together {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .day-box {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            min-width: 80px;
+        }
+        
+        .day-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .day-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .memory {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .memory:last-child {
+            border-bottom: none;
+        }
+        
+        .memory-date {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        .memory-content {
+            margin-top: 0.5rem;
+        }
+        
+        .doodle-area {
+            border: 2px dashed #ccc;
+            height: 300px;
+            margin-top: 1rem;
+            background: white;
+        }
+        
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 1rem;
+            border-radius: 50px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav a {
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: bold;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .future-plan {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .plan-date {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bella & Hailey</h1>
+        <div class="subtitle">从2025年1月19日开始的故事</div>
+        
+        <!-- 漂浮的心形 -->
+        <div class="heart" style="top: 20%; left: 10%; font-size: 30px;">❤️</div>
+        <div class="heart" style="top: 70%; left: 80%; font-size: 40px;">❤️</div>
+        <div class="heart" style="top: 40%; left: 60%; font-size: 25px;">❤️</div>
+    </header>
+    
+    <nav>
+        <a href="#" class="nav-link active" data-tab="home">我们的时光</a>
+        <a href="#" class="nav-link" data-tab="memories">美好瞬间</a>
+        <a href="#" class="nav-link" data-tab="future">未来约定</a>
+        <a href="#" class="nav-link" data-tab="doodle">爱情涂鸦</a>
+    </nav>
+    
+    <div class="container">
+        <!-- 首页内容 -->
+        <div id="home" class="tab-content active">
+            <div class="section">
+                <h2>我们在一起的时间</h2>
+                <div class="timer" id="together-time">
+                    正在计算...
+                </div>
+                
+                <div class="days-together">
+                    <div class="day-box">
+                        <div class="day-number" id="years">0</div>
+                        <div class="day-label">年</div>
+                    </div>
+                    <div class="day-box">
+                        <div class="day-number" id="months">0</div>
+                        <div class="day-label">月</div>
+                    </div>
+                    <div class="day-box">
+                        <div class="day-number" id="days">0</div>
+                        <div class="day-label">日</div>
+                    </div>
+                    <div class="day-box">
+                        <div class="day-number" id="hours">0</div>
+                        <div class="day-label">小时</div>
+                    </div>
+                    <div class="day-box">
+                        <div class="day-number" id="minutes">0</div>
+                        <div class="day-label">分钟</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>我们的故事</h2>
+                <p>2025年1月19日，Bella和Hailey正式走到了一起。这一天，阳光特别温暖，就像我们彼此眼中的光芒。</p>
+                <p>从那天起，我们一起经历了无数美好的瞬间，创造了许多珍贵的回忆。这个网站将记录我们的点点滴滴，见证我们的爱情故事。</p>
+            </div>
+        </div>
+        
+        <!-- 美好瞬间 -->
+        <div id="memories" class="tab-content">
+            <div class="section">
+                <h2>我们的美好瞬间</h2>
+                
+                <div class="memory">
+                    <div class="memory-date">2025年1月19日 - 在一起的第一天</div>
+                    <div class="memory-content">
+                        <p>那天我们相约在咖啡馆，Bella紧张得把咖啡洒在了裙子上，Hailey笑着说这样更可爱。傍晚的夕阳特别美，我们牵着手走过公园的小路，正式开始了这段美好的恋情。</p>
+                    </div>
+                </div>
+                
+                <div class="memory">
+                    <div class="memory-date">2025年2月14日 - 第一个情人节</div>
+                    <div class="memory-content">
+                        <p>Hailey偷偷准备了99朵玫瑰藏在Bella的办公室，Bella则亲手做了巧克力。我们交换礼物时都感动得哭了，这是我们一起度过的第一个情人节。</p>
+                    </div>
+                </div>
+                
+                <div class="memory">
+                    <div class="memory-date">2025年5月20日 - 特别的日子</div>
+                    <div class="memory-content">
+                        <p>"520"这个特别的日子里，我们在海边放了一盏孔明灯，上面写着彼此的名字和心愿。海风轻轻吹拂，月光洒在海面上，那一刻仿佛时间静止。</p>
+                    </div>
+                </div>
+                
+                <div class="memory">
+                    <div class="memory-date">2025年7月7日 - 七夕节</div>
+                    <div class="memory-content">
+                        <p>传统的情人节，我们穿上汉服去了古镇。Bella为Hailey写了首小诗，Hailey则送了亲手绣的香囊。夜晚的星空特别明亮，我们许下了永远在一起的愿望。</p>
+                    </div>
+                </div>
+                
+                <p style="text-align: center; margin-top: 2rem;">
+                    <button id="add-memory">+ 添加新回忆</button>
+                </p>
+            </div>
+        </div>
+        
+        <!-- 未来约定 -->
+        <div id="future" class="tab-content">
+            <div class="section">
+                <h2>我们的未来约定</h2>
+                
+                <div class="future-plan">
+                    <div class="plan-date">2026年1月19日 - 一周年纪念</div>
+                    <p>回到我们第一次约会的地方，重温当时的感动。准备一个时间胶囊，写下对彼此的祝福和期待，约定五年后一起打开。</p>
+                </div>
+                
+                <div class="future-plan">
+                    <div class="plan-date">2026年夏季 - 第一次旅行</div>
+                    <p>计划一次长途旅行，去一个我们都向往的地方。可能是浪漫的巴黎，也可能是宁静的洱海，重要的是我们一起探索世界。</p>
+                </div>
+                
+                <div class="future-plan">
+                    <div class="plan-date">2027年 - 同居计划</div>
+                    <p>找一个阳光充足的房子，一起布置我们的家。Bella喜欢养花，Hailey喜欢做饭，我们要创造一个充满爱的小窝。</p>
+                </div>
+                
+                <div class="future-plan">
+                    <div class="plan-date">2030年 - 五周年展望</div>
+                    <p>希望那时我们已经有了稳定的生活，可能还养了一只猫或狗。一起打开时间胶囊，看看我们的愿望实现了多少。</p>
+                </div>
+                
+                <p style="text-align: center; margin-top: 2rem;">
+                    <button id="add-plan">+ 添加新计划</button>
+                </p>
+            </div>
+        </div>
+        
+        <!-- 爱情涂鸦 -->
+        <div id="doodle" class="tab-content">
+            <div class="section">
+                <h2>爱情涂鸦板</h2>
+                <p>在这里留下你们的爱情涂鸦，可以画下你们的约定、心情或者任何想表达的爱意。</p>
+                
+                <div class="doodle-area" id="doodle-canvas"></div>
+                
+                <div style="margin-top: 1rem;">
+                    <button id="clear-doodle">清空画板</button>
+                    <button id="save-doodle" style="margin-left: 1rem;">保存涂鸦</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Bella & Hailey 的爱情网站 · 始于2025年1月19日</p>
+        <p>❤️ 每一天都比昨天更爱你 ❤️</p>
+    </footer>
+
+    <script>
+        // 计算在一起的时间
+        function updateTogetherTime() {
+            const startDate = new Date('2025-01-19T00:00:00');
+            const now = new Date();
+            const diff = now - startDate;
+            
+            const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+            const months = Math.floor((diff % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+            const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            
+            document.getElementById('together-time').textContent = `我们已经在一起 ${years} 年 ${months} 个月 ${days} 天`;
+            document.getElementById('years').textContent = years;
+            document.getElementById('months').textContent = months;
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+        }
+        
+        // 初始化时间计算
+        updateTogetherTime();
+        setInterval(updateTogetherTime, 60000); // 每分钟更新一次
+        
+        // 标签页切换
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // 移除所有active类
+                document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+                
+                // 添加active类到当前点击的标签
+                this.classList.add('active');
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // 添加回忆
+        document.getElementById('add-memory').addEventListener('click', function() {
+            const date = prompt("请输入日期（如：2025年3月14日）");
+            if (date) {
+                const content = prompt("请输入回忆内容");
+                if (content) {
+                    const memoriesDiv = document.querySelector('#memories .section');
+                    const newMemory = document.createElement('div');
+                    newMemory.className = 'memory';
+                    newMemory.innerHTML = `
+                        <div class="memory-date">${date}</div>
+                        <div class="memory-content">
+                            <p>${content}</p>
+                        </div>
+                    `;
+                    memoriesDiv.insertBefore(newMemory, this.parentNode.parentNode);
+                    alert("回忆已添加！");
+                }
+            }
+        });
+        
+        // 添加计划
+        document.getElementById('add-plan').addEventListener('click', function() {
+            const date = prompt("请输入计划日期（如：2026年5月20日）");
+            if (date) {
+                const content = prompt("请输入计划内容");
+                if (content) {
+                    const plansDiv = document.querySelector('#future .section');
+                    const newPlan = document.createElement('div');
+                    newPlan.className = 'future-plan';
+                    newPlan.innerHTML = `
+                        <div class="plan-date">${date}</div>
+                        <p>${content}</p>
+                    `;
+                    plansDiv.insertBefore(newPlan, this.parentNode.parentNode);
+                    alert("计划已添加！");
+                }
+            }
+        });
+        
+        // 涂鸦板功能
+        let isDrawing = false;
+        const canvas = document.getElementById('doodle-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // 设置画布大小
+        function resizeCanvas() {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            ctx.strokeStyle = '#ff6b8b';
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'round';
+        }
+        
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        
+        // 绘画事件
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('touchstart', startDrawing);
+        
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('touchmove', draw);
+        
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('touchend', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+        
+        function startDrawing(e) {
+            isDrawing = true;
+            draw(e);
+        }
+        
+        function draw(e) {
+            if (!isDrawing) return;
+            
+            ctx.beginPath();
+            
+            // 处理触摸事件
+            const clientX = e.clientX || e.touches[0].clientX;
+            const clientY = e.clientY || e.touches[0].clientY;
+            
+            const rect = canvas.getBoundingClientRect();
+            const x = clientX - rect.left;
+            const y = clientY - rect.top;
+            
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+        }
+        
+        function stopDrawing() {
+            isDrawing = false;
+            ctx.beginPath();
+        }
+        
+        // 清空画板
+        document.getElementById('clear-doodle').addEventListener('click', function() {
+            if (confirm('确定要清空画板吗？')) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        });
+        
+        // 保存涂鸦（实际项目中需要服务器支持）
+        document.getElementById('save-doodle').addEventListener('click', function() {
+            alert('涂鸦已保存（实际部署时需要服务器支持此功能）');
+        });
+        
+        // 随机生成漂浮的心形
+        function createHearts() {
+            const colors = ['#ff6b8b', '#6b8bff', '#ff8b6b', '#8b6bff'];
+            const header = document.querySelector('header');
+            
+            for (let i = 0; i < 10; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤️';
+                heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                heart.style.fontSize = (20 + Math.random() * 30) + 'px';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = Math.random() * 100 + '%';
+                heart.style.animationDuration = (4 + Math.random() * 8) + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                header.appendChild(heart);
+            }
+        }
+        
+        createHearts();
+    </script>
+</body>
+</html>
